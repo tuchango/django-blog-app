@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.db import models
 
 
-class PublishedManager(models.manager):
+class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 
@@ -33,9 +33,9 @@ class Post(models.Model):
     published = PublishedManager()
 
     class Meta:
-        ordering = ['-published']
+        ordering = ['-publish']
         indexes = [
-            models.Index(fields=['-published']),
+            models.Index(fields=['-publish']),
         ]
 
     def __str__(self):
